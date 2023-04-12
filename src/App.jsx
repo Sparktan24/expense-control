@@ -1,10 +1,11 @@
 import { useState } from "react";
+import Header from "./components/Header";
 
 function App() {
   return (
-    <>
-      <h1>Expense control</h1>;<p className="test">Hello</p>
-    </>
+    <div>
+      <Header />
+    </div>
   );
 }
 
