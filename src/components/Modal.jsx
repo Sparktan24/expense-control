@@ -1,6 +1,11 @@
+import { useState } from "react";
 import CloseBtn from "../img/cerrar.svg";
 
 const Modal = ({ setModal, animateModal, setAnimateModal }) => {
+  const [expenseName, setExpenseName] = useState("");
+  const [expenseAmount, setExpenseAmount] = useState("");
+  const [expenseCategory, setExpenseCategory] = useState("");
+
   const hideModal = () => {
     setAnimateModal(false);
     setTimeout(() => {
@@ -23,6 +28,8 @@ const Modal = ({ setModal, animateModal, setAnimateModal }) => {
             id="name"
             type="text"
             placeholder="Add the name of the expense"
+            value={expenseName}
+            onChange={(e) => setExpenseName(e.target.value)}
           />
         </div>
 
@@ -32,12 +39,18 @@ const Modal = ({ setModal, animateModal, setAnimateModal }) => {
             id="amount"
             type="number"
             placeholder="Add the expense amount"
+            value={expenseAmount}
+            onChange={(e) => setExpenseAmount(Number(e.target.value))}
           />
         </div>
 
         <div className="campo">
           <label htmlFor="category">Category</label>
-          <select id="category">
+          <select
+            id="category"
+            value={expenseCategory}
+            onChange={(e) => setExpenseCategory(e.target.value)}
+          >
             <option value="">--Select--</option>
             <option value="savings">Savings</option>
             <option value="food">Food</option>
