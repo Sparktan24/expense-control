@@ -1,7 +1,9 @@
 import { useState } from "react";
+import Message from "./Message";
 import CloseBtn from "../img/cerrar.svg";
 
-const Modal = ({ setModal, animateModal, setAnimateModal }) => {
+const Modal = ({ setModal, animateModal, setAnimateModal, saveExpense }) => {
+  const [message, setMessage] = useState("");
   const [expenseName, setExpenseName] = useState("");
   const [expenseAmount, setExpenseAmount] = useState("");
   const [expenseCategory, setExpenseCategory] = useState("");
@@ -13,14 +15,37 @@ const Modal = ({ setModal, animateModal, setAnimateModal }) => {
     }, 500);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    /* [expenseName, expenseAmount, expenseCategory].includes("")
+      ? setMessage("All fields are required")
+      : console.log("validation passed"); */
+
+    if ([expenseName, expenseAmount, expenseCategory].includes("")) {
+      setMessage("All fields are required");
+      setTimeout(() => {
+        setMessage("");
+      }, 3000);
+      return;
+    }
+
+    saveExpense({ expenseName, expenseAmount, expenseCategory });
+    hideModal();
+  };
+
   return (
     <div className="modal">
       <div className="cerrar-modal">
         <img src={CloseBtn} alt="Close modal button" onClick={hideModal} />
       </div>
 
-      <form className={`formulario ${animateModal ? "animar" : "cerrar"}`}>
+      <form
+        onSubmit={handleSubmit}
+        className={`formulario ${animateModal ? "animar" : "cerrar"}`}
+      >
         <legend>New Expense</legend>
+        {message && <Message type="error">{message}</Message>}
 
         <div className="campo">
           <label htmlFor="name">Expense Name</label>
