@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Modal from "./components/Modal";
 import ExpenseList from "./components/ExpenseList";
@@ -13,6 +13,15 @@ function App() {
 
   const [modal, setModal] = useState(false);
   const [animateModal, setAnimateModal] = useState(false);
+
+  const [editExpense, setEditExpense] = useState({});
+
+  useEffect(() => {
+    if (Object.keys(editExpense).length > 0) {
+      handleNewExpense();
+      setEditExpense({});
+    }
+  }, [editExpense]);
 
   const handleNewExpense = () => {
     setModal(true);
@@ -41,7 +50,7 @@ function App() {
       {isValidBudget && (
         <>
           <main>
-            <ExpenseList expenses={expenses} />
+            <ExpenseList expenses={expenses} setEditExpense={setEditExpense} />
           </main>
           <div className="nuevo-gasto">
             <img
