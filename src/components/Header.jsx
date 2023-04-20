@@ -4,6 +4,7 @@ import BudgetControl from "./BudgetControl";
 
 const Header = ({
   expenses,
+  setExpenses,
   budget,
   setBudget,
   isValidBudget,
@@ -14,7 +15,13 @@ const Header = ({
       <h1>Expense planner</h1>
 
       {isValidBudget ? (
-        <BudgetControl expenses={expenses} budget={budget} />
+        <BudgetControl
+          expenses={expenses}
+          setExpenses={setExpenses}
+          budget={budget}
+          setBudget={setBudget}
+          setIsValidBudget={setIsValidBudget}
+        />
       ) : (
         <NewBudget
           budget={budget}
