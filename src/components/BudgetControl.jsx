@@ -9,7 +9,6 @@ const BudgetControl = ({ expenses, budget }) => {
       (total, expense) => total + expense.expenseAmount,
       0
     );
-    console.log(totalSpent);
 
     setSpent(totalSpent);
     setAvailable(budget - spent);

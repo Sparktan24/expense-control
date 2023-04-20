@@ -30,7 +30,7 @@ const Modal = ({
     setAnimateModal(false);
     setTimeout(() => {
       setModal(false);
-    }, 500);
+    }, 300);
   };
 
   const handleSubmit = (e) => {

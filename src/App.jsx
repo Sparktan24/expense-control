@@ -8,7 +8,7 @@ import IconNewExpense from "./img/nuevo-gasto.svg";
 function App() {
   const [expenses, setExpenses] = useState([]);
 
-  const [budget, setBudget] = useState(0);
+  const [budget, setBudget] = useState("");
   const [isValidBudget, setIsValidBudget] = useState(false);
 
   const [modal, setModal] = useState(false);
@@ -22,7 +22,7 @@ function App() {
 
       setTimeout(() => {
         setAnimateModal(true);
-      }, 500);
+      }, 300);
     }
   }, [editExpense]);
 
@@ -32,11 +32,10 @@ function App() {
 
     setTimeout(() => {
       setAnimateModal(true);
-    }, 500);
+    }, 300);
   };
 
   const saveExpense = (expense) => {
-    console.log(expense);
     if (expense.id) {
       const updatedExpenses = expenses.map((expenseState) =>
         expenseState.id === expense.id ? expense : expenseState
@@ -47,6 +46,12 @@ function App() {
       expense.date = Date.now();
       setExpenses([...expenses, expense]);
     }
+  };
+
+  const deleteExpense = (id) => {
+    //console.log(`Deleting the expense with the id: ${id}`);
+    const updatedExpenses = expenses.filter((expense) => expense.id !== id);
+    setExpenses(updatedExpenses);
   };
 
   return (
@@ -62,7 +67,11 @@ function App() {
       {isValidBudget && (
         <>
           <main>
-            <ExpenseList expenses={expenses} setEditExpense={setEditExpense} />
+            <ExpenseList
+              expenses={expenses}
+              setEditExpense={setEditExpense}
+              deleteExpense={deleteExpense}
+            />
           </main>
           <div className="nuevo-gasto">
             <img

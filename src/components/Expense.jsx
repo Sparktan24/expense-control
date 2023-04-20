@@ -28,7 +28,7 @@ const iconDictionary = {
   suscriptions: IconoSuscripciones,
 };
 
-const Expense = ({ expense, setEditExpense }) => {
+const Expense = ({ expense, setEditExpense, deleteExpense }) => {
   const { expenseName, expenseAmount, expenseCategory, id, date } = expense;
 
   const leadingActions = () => (
@@ -39,7 +39,9 @@ const Expense = ({ expense, setEditExpense }) => {
 
   const trailingActions = () => (
     <TrailingActions>
-      <SwipeAction onClick={() => console.log("delete")}>Delete</SwipeAction>
+      <SwipeAction onClick={() => deleteExpense(id)} destructive={true}>
+        Delete
+      </SwipeAction>
     </TrailingActions>
   );
 
