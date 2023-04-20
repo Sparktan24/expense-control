@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Header from "./components/Header";
+import Filters from "./components/Filters";
 import Modal from "./components/Modal";
 import ExpenseList from "./components/ExpenseList";
 import { generateId } from "./helpers";
@@ -22,6 +23,9 @@ function App() {
 
   const [editExpense, setEditExpense] = useState({});
 
+  const [filter, setFilter] = useState("");
+  const [filteredExpenses, setFilteredExpenses] = useState([]);
+
   useEffect(() => {
     if (Object.keys(editExpense).length > 0) {
       setModal(true);
@@ -39,6 +43,16 @@ function App() {
   useEffect(() => {
     localStorage.setItem("expenses", JSON.stringify(expenses) ?? []);
   }, [expenses]);
+
+  useEffect(() => {
+    //console.log(filter && "Filtering", filter);
+    if (filter) {
+      const filteredExpenses = expenses.filter(
+        (expense) => expense.expenseCategory === filter
+      );
+      setFilteredExpenses(filteredExpenses);
+    }
+  }, [filter]);
 
   useEffect(() => {
     const budgetLS = Number(localStorage.getItem("budget")) ?? 0;
@@ -85,10 +99,13 @@ function App() {
       {isValidBudget && (
         <>
           <main>
+            <Filters filter={filter} setFilter={setFilter} />
             <ExpenseList
               expenses={expenses}
               setEditExpense={setEditExpense}
               deleteExpense={deleteExpense}
+              filter={filter}
+              filteredExpenses={filteredExpenses}
             />
           </main>
           <div className="nuevo-gasto">
