@@ -28,7 +28,6 @@ function App() {
 
   const handleNewExpense = () => {
     setModal(true);
-    setEditExpense({});
 
     setTimeout(() => {
       setAnimateModal(true);
@@ -90,6 +89,7 @@ function App() {
           setAnimateModal={setAnimateModal}
           saveExpense={saveExpense}
           editExpense={editExpense}
+          setEditExpense={setEditExpense}
         />
       )}
     </div>
