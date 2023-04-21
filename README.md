@@ -22,6 +22,7 @@
 - Add a budget.
 - Create expenses with name and category.
 - Check how much you are spending.
+- Persistent data saved in your browser.
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -54,7 +55,7 @@
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- [Live Demo Link](https://dev--neto-vet-app.netlify.app/)
+- [Live Demo Link](https://sparktan-expense-control.netlify.app/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
